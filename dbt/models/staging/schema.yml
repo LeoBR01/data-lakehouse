@@ -1,0 +1,34 @@
+version: 2
+
+models:
+  - name: stg_github_events
+    description: "Eventos brutos do GitHub Archive limpos e padronizados"
+    columns:
+      - name: event_id
+        description: "Identificador unico do evento"
+        tests:
+          - not_null
+          - unique
+
+      - name: event_type
+        description: "Tipo do evento (PushEvent, PullRequestEvent, etc)"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['PushEvent', 'CreateEvent', 'PullRequestEvent',
+                         'WatchEvent', 'IssueCommentEvent', 'DeleteEvent',
+                         'IssuesEvent', 'ForkEvent', 'ReleaseEvent',
+                         'PullRequestReviewEvent', 'PullRequestReviewCommentEvent',
+                         'PublicEvent', 'CommitCommentEvent', 'MemberEvent',
+                         'GollumEvent']
+
+      - name: actor_login
+        description: "Username do usuario que fez a acao"
+        tests:
+          - not_null
+
+      - name: repo_name
+        description: "Nome do repositorio no formato owner/repo"
+        tests:
+          - not_null
