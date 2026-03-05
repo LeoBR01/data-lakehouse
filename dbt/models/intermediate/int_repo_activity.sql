@@ -26,3 +26,7 @@ filtered AS (
 )
 
 SELECT * FROM filtered
+
+
+
+
